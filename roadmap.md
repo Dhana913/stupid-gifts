@@ -3,3 +3,4 @@
 - [ ] Add one labeled sample gift, purchase link, and collapsible fictional review.
 - [ ] Implement desktop clipboard and mobile native sharing with the current site URL.
 - [ ] Verify the complete flow on desktop and mobile.
+- [ ] Remove the four requested introductory and decorative text blocks.

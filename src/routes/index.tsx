@@ -87,9 +87,7 @@ function Index() {
       </header>
       <main className="gift-main">
         <section className="intro">
-          <p className="eyebrow">Good intentions. Terrible gifts.</p>
           <h1 className="gift-title">STUPID<br />GIFTS<span aria-hidden="true">.</span></h1>
-          <p className="intro-copy">For the people you love.<br /><strong>And the things about them you don’t.</strong></p>
         </section>
         <form className="gift-form" onSubmit={findGift}>
           <div className="field-group">
@@ -101,7 +99,6 @@ function Index() {
             <Input className="gift-input" id="quirk" placeholder="Schedules meetings about meetings…" value={quirk} onChange={(event) => setQuirk(event.target.value)} required />
           </div>
           <Button type="submit" className="gift-submit">Find Their Stupid Gift <ArrowRight /></Button>
-          <p className="form-note">Thoughtful gifts are overrated.</p>
         </form>
         {recommendation ? (
           <section className="result-section" ref={resultsRef} aria-label="Gift recommendation">
@@ -124,7 +121,7 @@ function Index() {
             <Button variant="outline" className="share-button" onClick={shareGift} disabled={sharing}><Share2 /> Share This Stupid Gift</Button>
             <div className="share-feedback" role="status" aria-live="polite">{feedback}{sharedMessage && <p className="share-message">{sharedMessage}</p>}</div>
           </section>
-        ) : <p className="empty-note"><span aria-hidden="true">↓</span><br />Someone’s about to be very underwhelmed.</p>}
+        ) : null}
       </main>
       <footer className="site-footer"><span>STUPID GIFTS © {new Date().getFullYear()}</span><span>Bad presents. Good stories.</span></footer>
     </div>
