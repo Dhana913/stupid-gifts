@@ -1,26 +1,43 @@
-# Stupid Gifts
+STUPID GIFTS 
 
-Implement exactly the screenshot and nothing else
+Thoughtful gifts are overrated.
 
-This project was built with [Lovable](https://lovable.dev).
+STUPID GIFTS is a humorous gift recommendation app that helps you find hilariously terrible gifts for the people in your life.
 
-**Live app**: https://stupid-gifts.lovable.app
+How It Works
 
-## Build with Lovable
+1.	Enter who you're buying a gift for.
+2.	Describe their most ridiculous quirk.
+3.	Discover a stupid gift.
+4.	Read a fictional five-star review.
+5.	Buy the real product or share the recommendation.
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/ce068010-4222-4e77-8a1f-f8569b92b286).
+Example
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+Recipient: My partner
+Quirk: Spends 45 minutes in the bathroom
+Recommendation: A Toilet Timer!
+A sand clock that runs for 5 minutes 
 
-## Development
+Built With
+•	Lovable — app development and interface
+•	Supabase — gift database
+•	OpenAI — matching recipients and quirks to gifts
+•	GitHub — source code
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Contributions
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+Dhana Kannan
+•	Concept and humor
+•	Product design and user experience
+•	App development using Lovable
+•	Demo and presentation
+
+Links
+•	Live app: https://stupid-gifts.lovable.app
+
+Hackathon
+
+Built for the Stupid Ideas Hackathon, November 2026.
+
+Because sometimes the best gift is a terrible one.
