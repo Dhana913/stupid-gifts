@@ -87,7 +87,7 @@ function Index() {
       </header>
       <main className="gift-main">
         <section className="intro">
-          <h1 className="gift-title">STUPID<br />GIFTS<span aria-hidden="true">.</span></h1>
+          <h1 className="gift-title">STUPID<br />GIFTS</h1>
         </section>
         <form className="gift-form" onSubmit={findGift}>
           <div className="field-group">
