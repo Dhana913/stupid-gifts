@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowRight, ArrowUpRight, ChevronDown, ChevronUp, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { getFirstGift } from "@/lib/gifts.functions";
+import { findGift as selectGift } from "@/lib/gifts.functions";
+import type { GiftRequest } from "@/lib/gift-selection";
 import { buildShareMessage, copyShareMessage, shouldUseNativeShare } from "@/lib/gift-sharing";
 
 export const Route = createFileRoute("/")({
@@ -31,21 +33,22 @@ function Index() {
   const resultsRef = useRef<HTMLElement>(null);
   const feedbackTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-  const giftMutation = useMutation({ mutationFn: () => getFirstGift() });
-  const gift = giftMutation.data ?? null;
+  const findGiftOnServer = useServerFn(selectGift);
+  const giftMutation = useMutation({ mutationFn: (input: GiftRequest) => findGiftOnServer({ data: input }), retry: false });
+  const gift = giftMutation.data?.gift ?? null;
 
   useEffect(() => () => clearTimeout(feedbackTimer.current), []);
 
   function findGift(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!recipient.trim() || !quirk.trim()) return;
+    if (!recipient.trim() || !quirk.trim() || giftMutation.isPending) return;
     setRecommendation({ recipient: recipient.trim(), quirk: quirk.trim() });
     setReviewOpen(false);
     setImageFailed(false);
     setFeedback("");
     setSharedMessage("");
     clearTimeout(feedbackTimer.current);
-    giftMutation.mutate();
+    giftMutation.mutate({ recipient: recipient.trim(), quirk: quirk.trim() });
     requestAnimationFrame(() => resultsRef.current?.scrollIntoView({ behavior: "instant", block: "start" }));
   }
 
@@ -101,10 +104,10 @@ function Index() {
           <section className="result-section" ref={resultsRef} aria-label="Gift recommendation">
             {giftMutation.isPending ? (
               <p className="empty-note"><span>Searching the shelves of bad ideas…</span></p>
-            ) : giftMutation.isError ? (
-              <p className="empty-note"><span>Couldn’t load a gift right now.</span>Try again in a moment.</p>
+            ) : giftMutation.isError || giftMutation.data?.error ? (
+              <p className="empty-note" role="alert"><span>{giftMutation.data?.error ?? "Couldn’t select a gift right now. Please try again in a moment."}</span></p>
             ) : !gift ? (
-              <p className="empty-note"><span>The shelf is empty.</span>No gifts in the collection yet — check back soon.</p>
+              <p className="empty-note"><span>We couldn't find a stupid enough gift. Try a different quirk!</span></p>
             ) : (
               <article className="gift-card">
                 {gift.image_url && !imageFailed ? (
