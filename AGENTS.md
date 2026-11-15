@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## App architecture
+- Keep the sample gift as static catalog data in the home page; no backend or AI is needed for this demonstration.
+- Keep share-message construction and device detection in a browser-safe utility with concrete unit tests; desktop must never invoke native sharing.
+- Derive the shared site URL from the current browser origin, so publication and custom domains need no hardcoded URL.
