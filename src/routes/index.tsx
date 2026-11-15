@@ -94,7 +94,7 @@ function Index() {
           </div>
           <div className="field-group">
             <label className="field-label" htmlFor="quirk">Their most ridiculous quirk?</label>
-            <Input className="gift-input" id="quirk" placeholder="Schedules meetings about meetings…" value={quirk} onChange={(event) => setQuirk(event.target.value)} required />
+            <Input className="gift-input" id="quirk" placeholder="Hogs bathroom" value={quirk} onChange={(event) => setQuirk(event.target.value)} required />
           </div>
           <Button type="submit" className="gift-submit" disabled={giftMutation.isPending}>
             {giftMutation.isPending ? "Finding a perfectly terrible gift…" : "Find Their Stupid Gift"} <ArrowRight />
@@ -117,15 +117,14 @@ function Index() {
                 )}
                 <div className="gift-details">
                   <h3 className="product-title">{gift.name ?? "A Mysterious Stupid Gift"}</h3>
-                  <p className="product-description">
-                    For {recommendation.recipient}, whose signature move is “{recommendation.quirk}.”{gift.description ? ` ${gift.description}.` : ""}
-                  </p>
+                  {gift.description ? <p className="product-description">{gift.description}</p> : null}
                   <div className="action-row">
                     {gift.purchase_url ? (
                       <Button className="purchase-button" asChild><a href={gift.purchase_url} target="_blank" rel="noopener noreferrer">Buy This Stupid Gift <ArrowUpRight /></a></Button>
                     ) : null}
                     <Button variant="outline" className="share-button" onClick={shareGift} disabled={sharing}><Share2 /> Share This Stupid Gift</Button>
                   </div>
+                  <div className="share-feedback" role="status" aria-live="polite">{feedback}{sharedMessage && <p className="share-message">{sharedMessage}</p>}</div>
                   <div className="review-area">
                     <div className="review-heading"><span className="review-stars" aria-label="5 out of 5 stars">★★★★★</span><span className="review-label">FICTIONAL REVIEW</span></div>
                     {gift.fictional_review ? (
@@ -140,11 +139,9 @@ function Index() {
                 </div>
               </article>
             )}
-            <div className="share-feedback" role="status" aria-live="polite">{feedback}{sharedMessage && <p className="share-message">{sharedMessage}</p>}</div>
           </section>
         ) : null}
       </main>
-      <footer className="site-footer"><span>STUPID GIFTS © {new Date().getFullYear()}</span><span>Bad presents. Good stories.</span></footer>
     </div>
   );
 }
