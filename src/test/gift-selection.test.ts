@@ -49,7 +49,7 @@ describe("Catalog-only gift selection", () => {
     expect(allow("new-visitor", 3_600_000)).toBe(true);
   });
   it("sends only names, IDs, tags and user inputs to the low-cost model", async () => {
-    const fetchMock = vi.fn(async () => new Response(JSON.stringify({ choices: [{ message: { content: "7" }, finish_reason: "stop" }] })));
+    const fetchMock = vi.fn(async (_url: string | URL | Request, _init?: RequestInit) => new Response(JSON.stringify({ choices: [{ message: { content: "7" }, finish_reason: "stop" }] })));
     vi.stubGlobal("fetch", fetchMock);
     await expect(askOpenAI("test-only-placeholder", { recipient: "boss", quirk: "meetings" }, catalog)).resolves.toBe("7");
     const init = fetchMock.mock.calls[0]?.[1] as RequestInit | undefined;

@@ -61,7 +61,7 @@ export const findGift = createServerFn({ method: "POST" })
       async (id) => {
         const { data: selected, error } = await supabase.from("gifts")
           .select("id, name, description, image_url, purchase_url, fictional_review")
-          .eq("id", id).maybeSingle().abortSignal(AbortSignal.timeout(10_000));
+          .eq("id", id).abortSignal(AbortSignal.timeout(10_000)).maybeSingle();
         if (error) throw new Error("Gift unavailable");
         return selected;
       },
