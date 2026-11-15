@@ -30,6 +30,7 @@
  */
 
 @theme inline {
+  --font-sans: "Manrope", Arial, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -151,7 +152,7 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: "DM Sans", Arial, sans-serif;
+    font-family: var(--font-sans);
     letter-spacing: 0;
   }
 }
@@ -164,7 +165,7 @@
 .gift-main { width: min(600px, calc(100% - 40px)); margin: 0 auto; padding: 65px 0 72px; flex: 1; }
 .intro { text-align: center; }
 .eyebrow { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--muted-foreground); }
-.gift-title { margin: 20px 0 16px; font-size: 76px; font-weight: 900; line-height: 1.02; letter-spacing: 0; }
+.gift-title { margin: 20px 0 16px; font-size: 76px; font-weight: 700; line-height: 1.02; letter-spacing: 0; }
 .intro-copy { margin: 0; font-size: 18px; line-height: 1.65; color: var(--muted-foreground); }
 .intro-copy strong { color: var(--foreground); font-weight: 500; }
 .gift-form { margin-top: 42px; }
