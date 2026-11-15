@@ -30,6 +30,7 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## App architecture
-- Gift recommendations come from the Supabase `gifts` table via `getFirstGift` in `src/lib/gifts.functions.ts` (first gift by ID for now; AI-based selection replaces this later). Never generate gift content with AI.
+- Gift recommendations use a TanStack server function that sends only catalog IDs, names and tags to OpenAI, validates the returned ID against the catalog, then reads the selected gift from Supabase; this prevents invented gift content and keeps credentials server-only.
+- Selection uses bounded inputs, provider timeouts, and best-effort per-visitor/per-instance limits with no new tables; limits are not a durable spending cap.
 - Keep share-message construction and device detection in a browser-safe utility with concrete unit tests; desktop must never invoke native sharing.
 - Derive the shared site URL from the current browser origin, so publication and custom domains need no hardcoded URL.
