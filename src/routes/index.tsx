@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { ArrowRight, ArrowUpRight, ChevronDown, ChevronUp, Gift, Share2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown, ChevronUp, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import timerImage from "@/assets/toilet-timer.jpg";
