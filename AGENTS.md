@@ -30,6 +30,6 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## App architecture
-- Keep the sample gift as static catalog data in the home page; no backend or AI is needed for this demonstration.
+- Gift recommendations come from the Supabase `gifts` table via `getFirstGift` in `src/lib/gifts.functions.ts` (first gift by ID for now; AI-based selection replaces this later). Never generate gift content with AI.
 - Keep share-message construction and device detection in a browser-safe utility with concrete unit tests; desktop must never invoke native sharing.
 - Derive the shared site URL from the current browser origin, so publication and custom domains need no hardcoded URL.
