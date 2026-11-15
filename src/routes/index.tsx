@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { ArrowRight, ArrowUpRight, ChevronDown, ChevronUp, Gift, Share2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown, ChevronUp, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import timerImage from "@/assets/toilet-timer.jpg";
@@ -81,10 +81,6 @@ function Index() {
 
   return (
     <div className="site-shell">
-      <header className="site-header">
-        <div className="brand-mark"><Gift size={20} strokeWidth={1.8} /> STUPID GIFTS</div>
-        <span className="header-note">Excellent taste. Questionable judgment.</span>
-      </header>
       <main className="gift-main">
         <section className="intro">
           <h1 className="gift-title">STUPID<br />GIFTS</h1>
@@ -102,15 +98,15 @@ function Index() {
         </form>
         {recommendation ? (
           <section className="result-section" ref={resultsRef} aria-label="Gift recommendation">
-            <div className="result-heading"><h2>A perfectly terrible choice.</h2><span className="sample-label">SAMPLE GIFT</span></div>
             <article className="gift-card">
               <img className="product-image" src={sampleGift.image} alt="Sample Toilet Timer: a miniature white toilet with a black-sand hourglass" width={1024} height={1024} loading="lazy" />
               <div className="gift-details">
-                <p className="product-category">UNNECESSARY. UNFORGETTABLE.</p>
                 <h3 className="product-title">{sampleGift.name}</h3>
                 <p className="product-description">For {recommendation.recipient}, whose signature move is “{recommendation.quirk}.” A tiny throne that measures time, not progress. Because nothing says “I appreciate you” like putting a countdown on their nonsense.</p>
-                <Button className="purchase-button" asChild><a href={sampleGift.purchaseUrl} target="_blank" rel="noopener noreferrer">Buy This Stupid Gift <ArrowUpRight /></a></Button>
-                <p className="product-disclaimer">Demo gift & image · Purchase link opens an Amazon search.</p>
+                <div className="action-row">
+                  <Button className="purchase-button" asChild><a href={sampleGift.purchaseUrl} target="_blank" rel="noopener noreferrer">Buy This Stupid Gift <ArrowUpRight /></a></Button>
+                  <Button variant="outline" className="share-button" onClick={shareGift} disabled={sharing}><Share2 /> Share This Stupid Gift</Button>
+                </div>
                 <div className="review-area">
                   <div className="review-heading"><span className="review-stars" aria-label="5 out of 5 stars">★★★★★</span><span className="review-label">FICTIONAL REVIEW</span></div>
                   <Button type="button" variant="link" className="review-toggle" aria-expanded={reviewOpen} aria-controls="fictional-review" onClick={() => setReviewOpen(!reviewOpen)}>{reviewOpen ? "Hide review" : "Read review"}{reviewOpen ? <ChevronUp /> : <ChevronDown />}</Button>
@@ -118,7 +114,6 @@ function Index() {
                 </div>
               </div>
             </article>
-            <Button variant="outline" className="share-button" onClick={shareGift} disabled={sharing}><Share2 /> Share This Stupid Gift</Button>
             <div className="share-feedback" role="status" aria-live="polite">{feedback}{sharedMessage && <p className="share-message">{sharedMessage}</p>}</div>
           </section>
         ) : null}
